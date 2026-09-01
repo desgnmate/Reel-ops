@@ -1,0 +1,129 @@
+.legalPage {
+  min-height: 100vh;
+  padding: calc(80px + var(--space-3xl)) 0 var(--space-5xl);
+  background-color: var(--bg-default);
+}
+
+.inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-bottom: var(--space-2xl);
+  transition: color 0.2s ease;
+}
+
+.backLink:hover {
+  color: var(--text-primary);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.lastUpdated {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-3xl);
+}
+
+.section {
+  margin-bottom: var(--space-2xl);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.text {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--space-md);
+}
+
+.text:last-child {
+  margin-bottom: 0;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-md);
+}
+
+.listItem {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  padding-left: var(--space-lg);
+  position: relative;
+}
+
+.listItem::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+.contactInfo {
+  padding: var(--space-xl);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-lg);
+}
+
+.contactInfo p {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.contactInfo a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: var(--text-3xl);
+  }
+
+  .sectionTitle {
+    font-size: var(--text-lg);
+  }
+
+  .text,
+  .listItem {
+    font-size: var(--text-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .legalPage {
+    padding-top: calc(60px + var(--space-2xl));
+  }
+
+  .title {
+    font-size: var(--text-2xl);
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "Reel OPS Media",
+  "short_name": "Reel OPS",
+  "description": "Next-level video content and media marketing agency based in Arizona. Strategic storytelling, brand awareness campaigns, and full-service production.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

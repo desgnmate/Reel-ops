@@ -1,0 +1,278 @@
+.section {
+  padding: var(--space-4xl) 0;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  margin-bottom: var(--space-3xl);
+}
+
+.label {
+  font-family: var(--font-display);
+  color: var(--accent);
+  font-size: var(--text-base);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-xs);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.counter {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.counterActive {
+  color: var(--text-primary);
+}
+
+.counterSep {
+  color: var(--border-light);
+  font-weight: 300;
+}
+
+.counterTotal {
+  color: var(--text-secondary);
+}
+
+.arrows {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.arrow {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--duration-normal) ease;
+}
+
+.arrow:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Coverflow Carousel Styles */
+
+.carousel {
+  position: relative;
+  width: 100vw;
+  height: 65vh;
+  min-height: 400px;
+  max-height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  position: absolute;
+  width: 70vw;
+  max-width: 1000px;
+  height: 100%;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  /* Remove flex direction and gap because overlay handles text positioning */
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-elevated);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Gradient Overlay at the bottom for text readability */
+.gradientOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Text Content (Bottom Left) */
+.cardContent {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: var(--space-xl);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.projectName {
+  font-family: var(--font-body);
+  font-size: var(--text-2xl);
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.projectType {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* Play Button (Top Right) */
+.playButton {
+  position: absolute;
+  top: var(--space-xl);
+  right: var(--space-xl);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  pointer-events: auto;
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.playButton:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.05);
+}
+
+.playButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Stats Overlay */
+.statsOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1; /* Above video, below gradient/text */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2xl);
+  padding-bottom: var(--space-4xl); /* leave space for the title */
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.statLabel {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-xs);
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.statPositive {
+  color: var(--success);
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-md);
+  }
+
+  .carousel {
+    height: 50vh;
+  }
+
+  .card {
+    width: 85vw;
+  }
+
+  .cardContent {
+    bottom: var(--space-md);
+    left: var(--space-md);
+  }
+
+  .playButton {
+    top: var(--space-md);
+    right: var(--space-md);
+  }
+}
