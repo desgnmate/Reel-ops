@@ -4,15 +4,9 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fadeInDown } from '@/lib/animations';
 import styles from './Navbar.module.css';
+import type { SiteSettings } from '@/lib/cms/types';
 
-const NAV_LINKS = [
-  { label: 'Projects', href: '#projects' },
-  { label: 'Brand', href: '#team' },
-  { label: 'FAQ', href: '#services' },
-  { label: 'Demo', href: '#contact' },
-];
-
-export default function Navbar() {
+export default function Navbar({ settings }: { settings: SiteSettings }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -74,13 +68,13 @@ export default function Navbar() {
 
           {/* Desktop links */}
           <div className={styles.links}>
-            {NAV_LINKS.map((link) => (
+            {settings.navLinks.map((link) => (
               <a key={link.label} href={link.href} className={styles.link}>
                 {link.label}
               </a>
             ))}
-            <a href="#contact" className={styles.contactBtn}>
-              Contact
+            <a href={settings.contactHref} className={styles.contactBtn}>
+              {settings.contactLabel}
             </a>
           </div>
 
@@ -121,7 +115,7 @@ export default function Navbar() {
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className={styles.mobileMenuInner}>
-                {NAV_LINKS.map((link, i) => (
+                {settings.navLinks.map((link, i) => (
                   <motion.a
                     key={link.label}
                     href={link.href}
@@ -135,14 +129,14 @@ export default function Navbar() {
                   </motion.a>
                 ))}
                 <motion.a
-                  href="#contact"
+                  href={settings.contactHref}
                   className={styles.mobileContactBtn}
                   onClick={closeMenu}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.35, duration: 0.35 }}
                 >
-                  Contact
+                  {settings.contactLabel}
                 </motion.a>
               </div>
             </motion.div>

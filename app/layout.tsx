@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
+import { draftMode } from "next/headers";
 import { Bebas_Neue, Inter } from "next/font/google";
+import { VisualEditing } from "next-sanity/visual-editing";
+import { SanityLive } from "@/lib/cms/sanity";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -134,11 +137,13 @@ const jsonLd = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { isEnabled: isDraftMode } = await draftMode();
+
   return (
     <html lang="en">
       <head>
@@ -149,8 +154,9 @@ export default function RootLayout({
       </head>
       <body className={`${bebasNeue.variable} ${inter.variable}`}>
         {children}
+        {isDraftMode && <SanityLive includeDrafts />}
+        {isDraftMode && <VisualEditing />}
       </body>
     </html>
   );
 }
-

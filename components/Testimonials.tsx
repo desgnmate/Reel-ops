@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, viewportSettings } from '@/lib/animations';
+import type { TestimonialStat } from '@/lib/cms/types';
 import styles from './Testimonials.module.css';
 
 interface Testimonial {
@@ -56,9 +57,19 @@ const STATS = [
   { value: '98%', label: 'Would Recommend' },
 ];
 
-export default function Testimonials() {
+export default function Testimonials({
+  label = 'Testimonials',
+  title = 'Client Stories',
+  testimonials = TESTIMONIALS,
+  stats = STATS,
+}: {
+  label?: string;
+  title?: string;
+  testimonials?: Testimonial[];
+  stats?: TestimonialStat[];
+}) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const total = TESTIMONIALS.length;
+  const total = testimonials.length;
 
   const goTo = useCallback(
     (index: number) => {
@@ -79,8 +90,8 @@ export default function Testimonials() {
           viewport={viewportSettings}
         >
           <div className={styles.headerLeft}>
-            <p className={styles.label}>Testimonials</p>
-            <h2 className={styles.title}>Client Stories</h2>
+            <p className={styles.label}>{label}</p>
+            <h2 className={styles.title}>{title}</h2>
           </div>
 
           <div className={styles.headerRight}>
@@ -118,7 +129,7 @@ export default function Testimonials() {
         {/* Coverflow Carousel */}
         <div className={styles.carousel}>
           <div className={styles.track}>
-            {TESTIMONIALS.map((testimonial, index) => {
+            {testimonials.map((testimonial, index) => {
               const offset = index - activeIndex;
               return (
                 <TestimonialCard
@@ -140,7 +151,7 @@ export default function Testimonials() {
           whileInView="visible"
           viewport={viewportSettings}
         >
-          {STATS.map((stat) => (
+          {stats.map((stat) => (
             <div key={stat.label} className={styles.statItem}>
               <div className={styles.statValue}>{stat.value}</div>
               <div className={styles.statLabel}>{stat.label}</div>

@@ -2,9 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { fadeInUp, viewportSettings } from '@/lib/animations';
+import type { SiteSettings } from '@/lib/cms/types';
 import styles from './Footer.module.css';
 
-export default function Footer() {
+export default function Footer({ settings }: { settings: SiteSettings }) {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
@@ -18,21 +19,21 @@ export default function Footer() {
         >
           <img
             src="/images/logo-stacked-white.png"
-            alt="Reel OPS Media"
+            alt={settings.companyName}
             className={styles.brandLogo}
           />
         </motion.div>
 
         {/* Operation hours */}
         <div className={styles.info}>
-          <p className={styles.infoLabel}>Operation Hours</p>
-          <p className={styles.infoValue}>Monday to Friday</p>
+          <p className={styles.infoLabel}>{settings.footerHoursLabel}</p>
+          <p className={styles.infoValue}>{settings.footerHoursValue}</p>
         </div>
 
         {/* Social links */}
         <div className={styles.socials}>
           <a
-            href="https://instagram.com"
+            href={settings.instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.socialLink}
@@ -45,7 +46,7 @@ export default function Footer() {
             </svg>
           </a>
           <a
-            href="https://linkedin.com"
+            href={settings.linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.socialLink}
@@ -65,13 +66,13 @@ export default function Footer() {
           whileInView="visible"
           viewport={viewportSettings}
         >
-          Be the reason you stand out. Get a leg up in your space.
+          {settings.footerTagline}
         </motion.p>
 
         {/* Bottom bar */}
         <div className={styles.bottom}>
           <p className={styles.copyright}>
-            © {new Date().getFullYear()} Reel OPS Media. All rights reserved.
+            © {new Date().getFullYear()} {settings.companyName}. All rights reserved.
           </p>
           <div className={styles.legalLinks}>
             <a href="/privacy" className={styles.legalLink}>
@@ -84,12 +85,12 @@ export default function Footer() {
           <p className={styles.credit}>
             Developed by{' '}
             <a
-              href="https://desgnmate.com"
+              href={settings.developerUrl}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.creditLink}
             >
-              Desgnmate.com
+              {settings.developerName}
             </a>
           </p>
         </div>

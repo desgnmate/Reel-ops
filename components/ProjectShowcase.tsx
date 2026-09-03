@@ -3,103 +3,20 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fadeInUp, viewportSettings } from '@/lib/animations';
+import type { ProjectContent } from '@/lib/cms/types';
 import styles from './ProjectShowcase.module.css';
 
-interface ProjectStat {
+export default function ProjectShowcase({
+  label,
+  title,
+  projects,
+}: {
   label: string;
-  value: string;
-  positive?: boolean;
-}
-
-interface Project {
-  number: string;
-  image: string;
-  video?: string;
-  tags: string[];
-  name: string;
-  type: string;
-  stats: ProjectStat[];
-}
-
-const PROJECTS: Project[] = [
-  {
-    number: '01',
-    image: '/images/project-01.jpg',
-    video: '/images/project-01.mp4',
-    tags: ['Brand Awareness', 'Social Media', 'Video Production'],
-    name: 'Tactical Gear Co.',
-    type: 'Brand Awareness Campaign',
-    stats: [
-      { label: 'Views', value: '1.8M' },
-      { label: 'Engagement', value: '+310%', positive: true },
-    ],
-  },
-  {
-    number: '02',
-    image: '/images/project-02.jpg',
-    video: '/images/project-02.mp4',
-    tags: ['Paid Ads', 'Content Strategy', 'Social Media'],
-    name: 'Tier 1 Athletics',
-    type: 'Content Campaign',
-    stats: [
-      { label: 'Views', value: '2.1M' },
-      { label: 'Engagement', value: '+400%', positive: true },
-      { label: 'Revenue', value: '+487%', positive: true },
-    ],
-  },
-  {
-    number: '03',
-    image: '/images/project-03.jpg',
-    video: '/images/project-03.mp4',
-    tags: ['Product Launch', 'Video Production', 'Paid Ads'],
-    name: 'Vanguard Fitness',
-    type: 'Product Launch',
-    stats: [
-      { label: 'Reach', value: '950K' },
-      { label: 'Conversions', value: '+220%', positive: true },
-    ],
-  },
-  {
-    number: '04',
-    image: '/images/project-04.jpg',
-    video: '/images/project-04.mp4',
-    tags: ['Brand Identity', 'Commercial', 'Video Production'],
-    name: 'Desert Storm LLC',
-    type: 'Brand Identity',
-    stats: [
-      { label: 'Views', value: '1.5M' },
-      { label: 'Growth', value: '+320%', positive: true },
-    ],
-  },
-  {
-    number: '05',
-    image: '/images/project-05.jpg',
-    video: '/images/project-05.mp4',
-    tags: ['Social Media', 'Content Creation', 'Photography'],
-    name: 'Iron Republic',
-    type: 'Social Campaign',
-    stats: [
-      { label: 'Followers', value: '+12K' },
-      { label: 'Engagement', value: '+180%', positive: true },
-    ],
-  },
-  {
-    number: '06',
-    image: '/images/project-06.jpg',
-    video: '/images/project-06.mp4',
-    tags: ['Brand Awareness', 'Paid Ads', 'Analytics'],
-    name: 'Apex Dynamics',
-    type: 'Full Service',
-    stats: [
-      { label: 'Reach', value: '3.2M' },
-      { label: 'ROI', value: '+550%', positive: true },
-    ],
-  },
-];
-
-export default function ProjectShowcase() {
+  title: string;
+  projects: ProjectContent[];
+}) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const totalProjects = PROJECTS.length;
+  const totalProjects = projects.length;
 
   const goTo = useCallback(
     (index: number) => {
@@ -120,8 +37,8 @@ export default function ProjectShowcase() {
         viewport={viewportSettings}
       >
         <div className={styles.headerLeft}>
-          <p className={styles.label}>Past Projects</p>
-          <h2 className={styles.title}>Our Work</h2>
+          <p className={styles.label}>{label}</p>
+          <h2 className={styles.title}>{title}</h2>
         </div>
 
         <div className={styles.headerRight}>
@@ -159,7 +76,7 @@ export default function ProjectShowcase() {
       {/* Coverflow Carousel */}
       <div className={styles.carousel}>
         <div className={styles.track}>
-          {PROJECTS.map((project, index) => {
+          {projects.map((project, index) => {
             const offset = index - activeIndex;
             return (
               <ProjectCard
@@ -187,7 +104,7 @@ function ProjectCard({
   isActive,
   onClick,
 }: {
-  project: Project;
+  project: ProjectContent;
   offset: number;
   isActive: boolean;
   onClick: () => void;

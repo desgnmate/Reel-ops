@@ -8,14 +8,15 @@ import {
 } from '@/lib/animations';
 import Button from './ui/Button';
 import styles from './Hero.module.css';
+import type { HeroContent } from '@/lib/cms/types';
 
-export default function Hero() {
+export default function Hero({ content }: { content: HeroContent }) {
   return (
     <section className={styles.hero} id="hero">
       {/* Background cinematic video */}
       <div className={styles.heroBg}>
-        <video
-          src="/videos/hero-bg.mp4"
+          <video
+          src={content.backgroundVideo}
           autoPlay
           loop
           muted
@@ -33,7 +34,7 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
           >
-            Reel OPS Media
+            {content.eyebrow}
           </motion.p>
 
           <motion.h1
@@ -42,9 +43,9 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
           >
-            Next Level
+            {content.titleLine1}
             <br />
-            Content
+            {content.titleLine2}
           </motion.h1>
 
           <motion.p
@@ -53,8 +54,7 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
           >
-            Driving real business growth through strategic video and media
-            marketing. We turn your vision into content that converts.
+            {content.subtitle}
           </motion.p>
 
           <motion.div
@@ -63,11 +63,11 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
           >
-            <Button variant="outline" href="#projects">
-              View Projects
+            <Button variant="outline" href={content.primaryCtaHref}>
+              {content.primaryCtaLabel}
             </Button>
-            <Button variant="solid" href="#contact">
-              Book A Demo
+            <Button variant="solid" href={content.secondaryCtaHref}>
+              {content.secondaryCtaLabel}
             </Button>
           </motion.div>
         </div>

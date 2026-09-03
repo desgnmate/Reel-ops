@@ -3,8 +3,9 @@
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerContainer, viewportSettings } from '@/lib/animations';
 import styles from './Mission.module.css';
+import type { MissionContent } from '@/lib/cms/types';
 
-export default function Mission() {
+export default function Mission({ content }: { content: MissionContent }) {
   return (
     <section className={styles.mission}>
       <motion.div
@@ -15,15 +16,15 @@ export default function Mission() {
         viewport={viewportSettings}
       >
         <motion.h2 className={styles.title} variants={fadeInUp}>
-          OUR
+          {content.leftLine1}
           <br />
-          MISSION
+          {content.leftLine2}
         </motion.h2>
 
         <motion.h2 className={styles.title} variants={fadeInUp}>
-          YOUR
+          {content.rightLine1}
           <br />
-          <span className={styles.accent}>SUCCESS</span>
+          <span className={styles.accent}>{content.rightLine2}</span>
         </motion.h2>
       </motion.div>
     </section>

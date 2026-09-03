@@ -8,31 +8,21 @@ import {
 } from '@/lib/animations';
 import Button from './ui/Button';
 import styles from './Services.module.css';
+import type { ServiceContent } from '@/lib/cms/types';
 
-const SERVICES = [
-  {
-    title: 'Meet And Greet',
-    description:
-      'Book a call and lets discuss your idea.',
-  },
-  {
-    title: 'Strategy Session',
-    description:
-      'Book a call and lets discuss your idea.',
-  },
-  {
-    title: 'Content Creation',
-    description:
-      'Book a call and lets discuss your idea.',
-  },
-  {
-    title: 'Analyses',
-    description:
-      'Book a call and lets discuss your idea.',
-  },
-];
-
-export default function Services() {
+export default function Services({
+  label,
+  title,
+  services,
+  ctaLabel,
+  pastProjectsLabel,
+}: {
+  label: string;
+  title: string;
+  services: ServiceContent[];
+  ctaLabel: string;
+  pastProjectsLabel: string;
+}) {
   return (
     <section className={styles.services} id="services">
       <div className={styles.inner}>
@@ -43,8 +33,8 @@ export default function Services() {
           whileInView="visible"
           viewport={viewportSettings}
         >
-          <p className={styles.label}>Services</p>
-          <h2 className={styles.title}>What We Do</h2>
+          <p className={styles.label}>{label}</p>
+          <h2 className={styles.title}>{title}</h2>
         </motion.div>
 
         <motion.div
@@ -54,7 +44,7 @@ export default function Services() {
           whileInView="visible"
           viewport={viewportSettings}
         >
-          {SERVICES.map((service, index) => (
+          {services.map((service, index) => (
             <motion.div
               key={service.title}
               className={styles.card}
@@ -75,10 +65,10 @@ export default function Services() {
           viewport={viewportSettings}
         >
           <Button variant="solid" href="#contact">
-            See Packages
+            {ctaLabel}
           </Button>
           <a href="#projects" className={styles.pastLink}>
-            See Past Projects Below
+            {pastProjectsLabel}
           </a>
         </motion.div>
       </div>

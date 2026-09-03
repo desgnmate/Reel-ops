@@ -7,23 +7,28 @@ import {
   scaleIn,
   viewportSettings,
 } from '@/lib/animations';
+import type { AllyContent, ContractorContent } from '@/lib/cms/types';
 import styles from './Allies.module.css';
 
-const ALLIES = [
-  { name: 'Tier 1', image: '/images/ally-tier1.jpg', role: 'Production Partner' },
-  { name: 'Brus Media', image: '/images/ally-brus.jpg', role: 'Post-Production' },
-  { name: 'Empire Rentals', image: '/images/ally-empire.jpg', role: 'Equipment & Gear' },
-];
-
-const CONTRACTORS = [
-  { role: 'Camera Operator', count: 2 },
-  { role: 'Lighting Expert', count: 1 },
-  { role: 'Audio Specialist', count: 1 },
-  { role: 'Editor', count: 1 },
-  { role: 'Drone Pilot', count: 1 },
-];
-
-export default function Allies() {
+export default function Allies({
+  label,
+  title,
+  description,
+  allies,
+  contractorCount,
+  contractorTitle,
+  contractorSubtitle,
+  contractors,
+}: {
+  label: string;
+  title: string;
+  description: string;
+  allies: AllyContent[];
+  contractorCount: number;
+  contractorTitle: string;
+  contractorSubtitle: string;
+  contractors: ContractorContent[];
+}) {
   return (
     <section className={styles.allies}>
       <div className={styles.inner}>
@@ -36,14 +41,10 @@ export default function Allies() {
           viewport={viewportSettings}
         >
           <div className={styles.headerLeft}>
-            <p className={styles.label}>Network</p>
-            <h2 className={styles.title}>Allies</h2>
+            <p className={styles.label}>{label}</p>
+            <h2 className={styles.title}>{title}</h2>
           </div>
-          <p className={styles.headerDesc}>
-            We don&apos;t work alone. Our trusted network of partners and
-            contractors ensures every project gets the specialized
-            talent it needs.
-          </p>
+          <p className={styles.headerDesc}>{description}</p>
         </motion.div>
 
         {/* Two-column layout: partners + contractors */}
@@ -56,7 +57,7 @@ export default function Allies() {
             whileInView="visible"
             viewport={viewportSettings}
           >
-            {ALLIES.map((ally) => (
+            {allies.map((ally) => (
               <motion.div
                 key={ally.name}
                 className={styles.card}
@@ -64,7 +65,7 @@ export default function Allies() {
               >
                 <img
                   src={ally.image}
-                  alt={ally.name}
+                  alt={ally.imageAlt}
                   className={styles.cardImage}
                 />
                 <div className={styles.cardOverlay}>
@@ -84,15 +85,15 @@ export default function Allies() {
             viewport={viewportSettings}
           >
             <div className={styles.contractorHeader}>
-              <span className={styles.contractorCount}>6</span>
+              <span className={styles.contractorCount}>{contractorCount}</span>
               <div>
-                <p className={styles.contractorTitle}>Contractors</p>
-                <p className={styles.contractorSub}>On-call talent pool</p>
+                <p className={styles.contractorTitle}>{contractorTitle}</p>
+                <p className={styles.contractorSub}>{contractorSubtitle}</p>
               </div>
             </div>
 
             <div className={styles.contractorList}>
-              {CONTRACTORS.map((c) => (
+              {contractors.map((c) => (
                 <div key={c.role} className={styles.contractorItem}>
                   <span className={styles.contractorRole}>{c.role}</span>
                   <span className={styles.contractorDots} />

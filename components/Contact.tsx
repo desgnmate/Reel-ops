@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { fadeInUp, viewportSettings } from '@/lib/animations';
+import type { ContactContent } from '@/lib/cms/types';
 import styles from './Contact.module.css';
 
 const DAY_LABELS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -17,11 +18,11 @@ const CALENDAR_DAYS = [
 
 const ACTIVE_DAYS = [12, 13, 14];
 
-export default function Contact() {
+export default function Contact({ content }: { content: ContactContent }) {
   return (
     <section className={styles.contact} id="contact">
       <img
-        src="/images/book-a-call-bg.jpg"
+        src={content.backgroundImage}
         alt="Background"
         className={styles.bgImage}
       />
@@ -36,11 +37,8 @@ export default function Contact() {
           whileInView="visible"
           viewport={viewportSettings}
         >
-          <h2 className={styles.title}>Let&apos;s Chat</h2>
-          <p className={styles.subtitle}>
-            Find a time using Calendly below, answer some basic questions, and
-            lets discuss your project
-          </p>
+          <h2 className={styles.title}>{content.title}</h2>
+          <p className={styles.subtitle}>{content.subtitle}</p>
         </motion.div>
 
         {/* Calendar widget */}
@@ -54,8 +52,8 @@ export default function Contact() {
           {/* Left panel — meeting info */}
           <div className={styles.widgetLeft}>
             <div>
-              <p className={styles.widgetName}>Hamza Ehsan</p>
-              <h3 className={styles.widgetTitle}>Discovery</h3>
+              <p className={styles.widgetName}>{content.meetingName}</p>
+              <h3 className={styles.widgetTitle}>{content.meetingTitle}</h3>
             </div>
 
             <div className={styles.widgetMeta}>
@@ -68,7 +66,7 @@ export default function Contact() {
                   <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1" fill="none" />
                   <path d="M8 4v4l3 2" stroke="currentColor" strokeWidth="1" fill="none" />
                 </svg>
-                30 min
+                {content.duration}
               </div>
               <div className={styles.widgetMetaItem}>
                 <svg
@@ -79,14 +77,11 @@ export default function Contact() {
                   <rect x="2" y="3" width="12" height="10" rx="1" stroke="currentColor" strokeWidth="1" fill="none" />
                   <circle cx="8" cy="8" r="2" fill="currentColor" />
                 </svg>
-                Web conferencing details provided upon confirmation.
+                {content.conferencingText}
               </div>
             </div>
 
-            <p className={styles.widgetDesc}>
-              This meeting is for an introductory chat to discuss a potential
-              project.
-            </p>
+            <p className={styles.widgetDesc}>{content.description}</p>
           </div>
 
           {/* Right panel — calendar */}
@@ -94,7 +89,7 @@ export default function Contact() {
             <div className={styles.calendarHeader}>
               <div>
                 <p className={styles.calendarLabel}>Select a Date &amp; Time</p>
-                <p className={styles.calendarTitle}>November 2024</p>
+                <p className={styles.calendarTitle}>{content.calendarMonth}</p>
               </div>
               <div className={styles.calendarNav}>
                 <button className={styles.calendarNavBtn} aria-label="Previous month">
@@ -141,7 +136,7 @@ export default function Contact() {
             <div className={styles.timezone}>
               <p className={styles.timezoneLabel}>Time zone</p>
               <p className={styles.timezoneValue}>
-                UK, Ireland, Lisbon Time (8:24am)
+                {content.timezone}
               </p>
             </div>
           </div>
